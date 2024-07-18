@@ -1,10 +1,221 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>吳維文</title>
-  </head>
-  <body>
-    <h1>我是吳維文</h1>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wei-Wen Wu - Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            color: #333333;
+            background: #ffffff;
+            overflow-x: hidden;
+        }
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+        h1 {
+            font-size: 4em;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #1a73e8;
+            text-shadow: 2px 2px 4px rgba(26, 115, 232, 0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from {
+                text-shadow: 2px 2px 4px rgba(26, 115, 232, 0.3);
+            }
+            to {
+                text-shadow: 0 0 10px #1a73e8, 0 0 20px #1a73e8;
+            }
+        }
+        .section {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .section:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            color: #1a73e8;
+            margin-top: 0;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        li:before {
+            content: '▹';
+            color: #1a73e8;
+            margin-right: 10px;
+        }
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .badge {
+            transition: transform 0.3s ease;
+        }
+        .badge:hover {
+            transform: translateY(-5px);
+        }
+        .github-link {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .github-link a {
+            background: #1a73e8;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        .github-link a:hover {
+            background: #1557b0;
+            box-shadow: 0 0 20px rgba(26, 115, 232, 0.5);
+            transform: translateY(-3px);
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3em;
+            }
+            .section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="bg-canvas"></canvas>
+    <div class="container">
+        <h1>Wei-Wen Wu</h1>
+        
+        <div class="section">
+            <h2>Self Introduction</h2>
+            <p>Hi! I am currently studying in the Department of Electrical Engineering at CCU.</p>
+        </div>
+        
+        <div class="section">
+            <h2>Interests</h2>
+            <ul>
+                <li>Programming</li>
+                <li>Photography</li>
+                <li>Mountain climbing</li>
+                <li>Wind music</li>
+                <li>Playing ball</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Programming Languages</h2>
+            <div class="badges">
+                <img class="badge" src="https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+                <img class="badge" src="https://img.shields.io/badge/rust-000000?style=for-the-badge&logo=rust&logoColor=white" alt="Rust">
+                <img class="badge" src="https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white" alt="C++">
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Skills</h2>
+            <div class="badges">
+                <img class="badge" src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+                <img class="badge" src="https://img.shields.io/badge/ros-22314E?style=for-the-badge&logo=ros&logoColor=white" alt="ROS">
+                <img class="badge" src="https://img.shields.io/badge/sqlite-003B57?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite">
+                <img class="badge" src="https://img.shields.io/badge/pytorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch">
+            </div>
+        </div>
+
+        <div class="github-link">
+            <a href="https://github.com/timmy90928" target="_blank">Visit my GitHub profile</a>
+        </div>
+    </div>
+
+    <script>
+        let scene, camera, renderer, particles;
+
+        function init() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            const geometry = new THREE.BufferGeometry();
+            const vertices = [];
+
+            for (let i = 0; i < 5000; i++) {
+                const x = Math.random() * 2000 - 1000;
+                const y = Math.random() * 2000 - 1000;
+                const z = Math.random() * 2000 - 1000;
+                vertices.push(x, y, z);
+            }
+
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+
+            const material = new THREE.PointsMaterial({ color: 0x1a73e8, size: 2, transparent: true, opacity: 0.8 });
+            particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+
+            camera.position.z = 1000;
+
+            window.addEventListener('resize', onWindowResize, false);
+            document.addEventListener('mousemove', onMouseMove, false);
+
+            animate();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            particles.rotation.x += 0.0005;
+            particles.rotation.y += 0.0005;
+            renderer.render(scene, camera);
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function onMouseMove(event) {
+            const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+            const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+            particles.rotation.x += mouseY * 0.0005;
+            particles.rotation.y += mouseX * 0.0005;
+        }
+
+        init();
+    </script>
+</body>
 </html>
