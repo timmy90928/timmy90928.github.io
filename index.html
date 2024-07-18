@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wei-Wen Wu - Profile</title>
+    <title>Wei-Wen Wu</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
@@ -36,14 +36,20 @@
             margin-bottom: 40px;
             color: #1a73e8;
             text-shadow: 2px 2px 4px rgba(26, 115, 232, 0.3);
-            animation: glow 2s ease-in-out infinite alternate;
+            animation: colorChange 5s infinite alternate;
         }
-        @keyframes glow {
-            from {
+        @keyframes colorChange {
+            0% {
+                color: #1a73e8;
                 text-shadow: 2px 2px 4px rgba(26, 115, 232, 0.3);
             }
-            to {
-                text-shadow: 0 0 10px #1a73e8, 0 0 20px #1a73e8;
+            50% {
+                color: #e91e63;
+                text-shadow: 2px 2px 4px rgba(233, 30, 99, 0.3);
+            }
+            100% {
+                color: #ffeb3b;
+                text-shadow: 2px 2px 4px rgba(255, 235, 59, 0.3);
             }
         }
         .section {
@@ -115,6 +121,84 @@
                 padding: 20px;
             }
         }
+		.contact-card {
+			background: linear-gradient(135deg, #6e8efb, #a777e3);
+			border-radius: 20px;
+			padding: 30px;
+			color: white;
+			text-align: center;
+			position: relative;
+			overflow: hidden;
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+		}
+
+		.contact-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+		}
+
+		.contact-card::before {
+			content: '';
+			position: absolute;
+			top: -50%;
+			left: -50%;
+			width: 200%;
+			height: 200%;
+			background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+			transform: rotate(45deg);
+			transition: transform 0.5s ease;
+		}
+
+		.contact-card:hover::before {
+			transform: rotate(45deg) translate(10%, 10%);
+		}
+
+		.card-content {
+			position: relative;
+			z-index: 1;
+		}
+
+		.contact-card h2 {
+			color: white;
+			margin-bottom: 15px;
+			font-size: 2em;
+		}
+
+		.contact-card p {
+			margin-bottom: 20px;
+			font-size: 1.1em;
+		}
+
+		.email-container {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: rgba(255, 255, 255, 0.2);
+			border-radius: 30px;
+			padding: 10px 20px;
+			transition: background 0.3s ease;
+		}
+
+		.email-container:hover {
+			background: rgba(255, 255, 255, 0.3);
+		}
+
+		.email-icon {
+			font-size: 1.5em;
+			margin-right: 10px;
+		}
+
+		.email-link {
+			color: white;
+			text-decoration: none;
+			font-weight: bold;
+			font-size: 1.1em;
+			transition: color 0.3s ease;
+		}
+
+		.email-link:hover {
+			color: #f0f0f0;
+		}
     </style>
 </head>
 <body>
@@ -157,9 +241,22 @@
             </div>
         </div>
 
-        <div class="github-link">
-            <a href="https://github.com/timmy90928" target="_blank">Visit my GitHub profile</a>
+      
+
+<div class="section contact-card">
+    <div class="card-content">
+        <h2>Let's Connect</h2>
+        <p>I'm always open to new opportunities and collaborations.</p>
+        <div class="email-container">
+            <span class="email-icon">✉️</span>
+            <a href="mailto:weiwen@alum.ccu.edu.tw" class="email-link">weiwen@alum.ccu.edu.tw</a>
         </div>
+    </div>
+</div>
+
+<div class="github-link">
+    <a href="https://github.com/timmy90928" target="_blank">Visit my GitHub profile</a>
+</div>
     </div>
 
     <script>
